@@ -7,6 +7,7 @@
     "test": "tests"
   },
   "scripts": {
+    "start": "node src/index.js",          
     "dev": "nodemon"
   },
   "repository": {
@@ -16,6 +17,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "20.x"
+  },
   "bugs": {
     "url": "https://github.com/MiheerDGH/LegalChainBackend/issues"
   },
@@ -35,4 +39,6 @@
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2"
   }
+  
+
 }
