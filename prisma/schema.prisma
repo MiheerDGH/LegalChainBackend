@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -15,20 +9,36 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
+  id        String     @id @default(uuid())
+  email     String     @unique
   name      String?
-  role      String
-  createdAt DateTime @default(now())
+  role      String     @default("client") // client, lawyer, admin
+  createdAt DateTime   @default(now())
+
   documents Document[]
+  sessions  Session[]
 }
 
 model Document {
-  id        String   @id @default(uuid())
-  title     String
-  url       String
-  analysis  String?  // Optional field for AI-generated summaries
-  ownerId   String
-  owner     User     @relation(fields: [ownerId], references: [id])
-  createdAt DateTime @default(now())
+  id         String     @id @default(uuid())
+  title      String
+  url        String     // File URL from Supabase storage
+  analysis   String?    // AI summary or extracted data
+  createdAt  DateTime   @default(now())
+
+  ownerId    String
+  owner      User       @relation(fields: [ownerId], references: [id])
+  sessionId  String?
+  session    Session?   @relation(fields: [sessionId], references: [id])
+}
+
+model Session {
+  id          String     @id @default(uuid())
+  name        String     // e.g., "NDA Review July"
+  startedAt   DateTime   @default(now())
+  userId      String
+
+  user        User       @relation(fields: [userId], references: [id])
+  documents   Document[]
+  feedback    String?    // Optional lawyer or client feedback
 }

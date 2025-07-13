@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node src/index.js",          
+    "start": "node src/index.js",
     "dev": "nodemon"
   },
   "repository": {
@@ -39,6 +39,4 @@
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2"
   }
-  
-
 }
