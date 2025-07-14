@@ -4,6 +4,7 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -24,11 +25,30 @@ model User {
 }
 
 model Document {
-  id        String   @id @default(uuid())
-  title     String
-  url       String
-  analysis  String?  // Optional field for AI-generated summaries
-  ownerId   String
-  owner     User     @relation(fields: [ownerId], references: [id])
-  createdAt DateTime @default(now())
+  id              String           @id @default(uuid())
+  title           String
+  url             String
+  ownerId         String
+  owner           User             @relation(fields: [ownerId], references: [id])
+  createdAt       DateTime         @default(now())
+
+  analysisResult  AnalysisResult?  @relation("DocAnalysis") // 对端
+}
+
+model AnalysisResult {
+  id         String   @id @default(uuid())
+  docId      String   @unique
+  document   Document @relation("DocAnalysis", fields: [docId], references: [id])
+
+  riskScore  Float
+  summary    String?
+  createdAt  DateTime @default(now())
+}
+
+
+enum Role {
+  USER
+  ADMIN
+  ATTORNEY
+  SMB
 }
