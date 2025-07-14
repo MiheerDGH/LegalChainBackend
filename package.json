@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "postinstall": "prisma generate"
   },
   "repository": {
     "type": "git",
