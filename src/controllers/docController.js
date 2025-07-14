@@ -1,5 +1,5 @@
 const { supabase } = require('../config/supabaseClient');
-const { PrimsaClient } = require('@prisma/client'); // adjust if needed
+const { PrismaClient } = require('@prisma/client'); // adjust if needed
 const prisma = new PrismaClient;
 const { v4: uuidv4 } = require('uuid');
 
