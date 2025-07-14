@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 const prisma = new PrismaClient();
 
 async function main() {
-  // 1. 创建 Admin
+  // 1. create Admin
   const admin = await prisma.user.upsert({
     where: { email: 'admin@example.com' },
     update: {},
@@ -15,7 +15,7 @@ async function main() {
     },
   });
 
-  // 2. 随机 4 个普通用户 + 每人 3 份文档 + 1 份分析
+  // 2. Randomly select 4 ordinary users + 3 documents per person + 1 analysis
   for (let i = 0; i < 4; i++) {
     const user = await prisma.user.create({
       data: {
