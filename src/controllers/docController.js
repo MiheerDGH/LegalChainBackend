@@ -1,4 +1,3 @@
-
 const { supabase } = require('../config/supabaseClient');
 const { PrimsaClient } = require('@prisma/client'); // adjust if needed
 const prisma = new PrismaClient;
