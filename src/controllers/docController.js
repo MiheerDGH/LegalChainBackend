@@ -1,6 +1,7 @@
 
 const { supabase } = require('../config/supabaseClient');
-const prisma = require('../../prisma/client'); // adjust if needed
+const { PrimsaClient } = require('../../generated/prisma'); // adjust if needed
+const prisma = new PrismaClient;
 const { v4: uuidv4 } = require('uuid');
 
 // POST /api/docs/upload
@@ -21,7 +22,7 @@ exports.uploadDocument = async (req, res) => {
 
   if (error) return res.status(500).json({ message: 'Supabase upload error', error });
 
-  const publicUrl = `https://your-project-id.supabase.co/storage/v1/object/public/documents/${fileName}`;
+  const publicUrl = `https://twtsapuvlpcxedudgzao/storage/v1/object/public/documents/${fileName}`;
 
   const doc = await prisma.document.create({
     data: {
